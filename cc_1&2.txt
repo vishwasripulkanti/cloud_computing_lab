@@ -122,14 +122,43 @@ __pycache__/
 *.pvc
 .env
 ctrl+x
+
 user@universe:~/flaskapp$ la -a
  .    app.py        flaskapp        .gitignore    vnev
  ..  'cc_1&2.txt'   flaskapp.sock   __pycache__
  user@universe:~/flaskapp$ git init
  Initialized empty Git repository in /home/user/flaskapp/.git/
+ 
+ //check the status
  user@universe:~/flaskapp$ git status
  get all the files in the project
+ 
+ //add ur files into git
+ user@universe:~/flaskapp$ git add .
+ Changes to be committed:
+ 
+ //create ur frst commit
+ user@universe:~/flaskapp$ git commit -m "intial flask project"
+[master (root-commit) bbe3c8f] intial flask project
+ 5 files changed, 149 insertions(+)
+ 
+ //create a git repository
+ open browser
+ created new repository with name cloud_computing_lab
+ 
 
+//connect your local project to github
+user@universe:~/flaskapp$ git remote add origin https://github.com/vishwasripulkanti/cloud_computing_lab.git
+
+//change branch to main
+user@universe:~/flaskapp$ git branch -M main
+
+//push your project
+user@universe:~/flaskapp$ git push -u origin main
+
+
+//token generation in github 
+//paste it in terminal that created password
 
 
 
