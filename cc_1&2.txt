@@ -1,0 +1,135 @@
+sudo sh filename
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install python3 python3-pip python3-venv -y
+python3 --version
+pip --version
+sudo apt install nginx -y
+sudo systemctl status nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+http://121.0.0.1
+//welcome to ngnix  ....in browser
+sudo systemctl stop nginx
+
+
+mkdir ~/flaskapp
+cd ~/flaskapp
+python3 -m venv vnev
+source vnev/bin/activate
+pip install flask gunicorn
+gedit app.py
+//write the code & save in flaskapp
+run the code using
+python3 filname.py
+get the http://192.168.99.141:5000 link 
+open in browser get msg as flaskapp application running successfully
+
+
+
+
+week 2
+cd ~/flaskapp
+source vnev/bin/activate
+gunicorn --bind 0.0.0.0:8000 app:app
+ctrl+c
+sudo nano /etc/systemd/system/flaskapp.service
+//write the code in nano
+[Unit]
+Description=Gunicorn instance for Flask app
+After=network.target
+[Service]
+User=user  
+Group=www-data
+WorkingDirectory=/home/user/flaskapp
+Environment="PATH=/home/user/flaskapp/vnev/bin"
+ExecStart=/home/user/flaskapp/vnev/bin/gunicorn --workers 3 --bind unix:/home/user/flaskapp/flaskapp.sock app:app
+Restart=always
+[Install]
+WantedBy=multi-user.target
+
+ctrl+x
+y
+
+
+sudo sytemctl daemon-reload
+sudo systemctl enable flaskapp
+sudo systemctl start flaskapp
+sudo systemctl status flaskapp
+
+
+//if u get any error go to nano terminal by using this command 
+sudo nano /etc/systemd/system/flaskapp.service
+change and ctrl+x and enter
+
+sudo systemctl daemon-reload
+sudo systemctl restart flaskapp
+sudo systemctl reload flaskapp
+
+get that output as 
+Active:active (running)
+
+
+sudo nano /etc/nginx/sites-available/flaskapp
+//write the code in nano
+server {
+listen 80;
+server_name 192.168.99.141;
+location /{
+proxy_pass http://127.0.0.1:5000;
+proxy_set_header Host $host;
+proxy_set_header X-Real-Ip $remote_addr;
+proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+proxy_set_header X-Forwarded-proto $scheme;
+proxy_connect_timeout 60s;
+proxy_read_timeout 60s;
+proxy_send_timeout 60s;
+}
+}
+
+
+sudo systemctl restart nginx
+sudo ufw allow 'Nginx Full'
+oprn the link http://192.168.99.141
+if any problem occurs in web page do this and again refersh the page
+curl http://127.0.0.1:5000
+
+week 3   
+install require packages for google app engines(gae)
+1.sudo apt update
+2.sudo apt install ca-certificates gnupg curl
+3.add the google cloud repository
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+ 
+$ echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+6.sudo apt update
+7.install cli
+sudo apt-get install google-cloud-cli
+8.gcloud --version
+9.gcloud init
+10.sudo apt install google-cloud-cli-app-engine-python
+11.sudo apt install google-cloud-cli-app-engine-java
+
+deploy flask(or any application) in github using render
+
+user@universe:~/flaskapp$ sudo apt install git
+user@universe:~/flaskapp$ git config --global user.email "vishwasripulkanti3001@gmail.com"
+user@universe:~/flaskapp$ git config --global user.name "vishwasri pulkanti"
+user@universe:~/flaskapp$ nano .gitignore
+vnev/
+__pycache__/
+*.pvc
+.env
+ctrl+x
+user@universe:~/flaskapp$ la -a
+ .    app.py        flaskapp        .gitignore    vnev
+ ..  'cc_1&2.txt'   flaskapp.sock   __pycache__
+ user@universe:~/flaskapp$ git init
+ Initialized empty Git repository in /home/user/flaskapp/.git/
+ user@universe:~/flaskapp$ git status
+ get all the files in the project
+
+
+
+

@@ -1,0 +1,5 @@
+vnev/
+--pycache--/
+*.pvc
+.env
+
